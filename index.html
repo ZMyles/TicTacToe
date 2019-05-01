@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Tic Tac Toe</title>
+</head>
+<body>
+
+<!-- Audio Files -->
+  <audio id="placeAvatar">
+    <source src="audio/placeAvatar.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id="winGame">
+      <source src="audio/winGame.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="tieGame">
+      <source src="audio/tieGame.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="diceRoll">
+      <source src="audio/diceRoll.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- ========================================
+          DISPLAY ON THE PAGE
+  ==============================================-->
+
+  <div id="shell">
+    <div id="gameMsBox" onclick="hideGameMsg">
+      <p id="gameMsg"></p>
+    </div>
+  </div>
+
+  <div id="gameMsgBox" onclick="hideGameMsg()"></div>
+  <div class="console_Left">
+    <div class="displayBox boxLeft">
+      <strong>Current Config:</strong>
+      <br>
+      <br>
+      <label>
+        "Player 1: &nbsp;&nbsp;"
+        <span id="p1Display">o</span>
+      </label>
+      <br>
+      <label>
+          "Player 2: &nbsp;&nbsp;""
+          <span id="p2Display">x</span>
+        </label>
+    </div>
+  </div>
+
+  <!-- =====================
+        START BUTTON
+      =======================-->
+  <div>
+    <button id="btnStart" onclick="startGame()">Start Game</button>
+  </div>
+  
+  <script src="script/script.js"></script>
+</body>
+</html>
