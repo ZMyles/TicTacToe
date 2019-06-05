@@ -2,8 +2,9 @@
 window.onload = function() {watch()};
 function watch() {
 	var btn = document.getElementById('btnStop');
-	btnDisabled(btn);  
+	btnDisabled(btn); 
 }
+
 
 function rollForTurn() {
 	var xArray = [];
@@ -17,21 +18,21 @@ function rollForTurn() {
 		ranNum = Math.floor(Math.random()*(maximum - minimum) + minimum);
 		xArray.push(ranNum);
 	}
-    diceRoll(); 
+    diceRoll();
     for (i=0;i<xArray.length;i++) {
 		var result = i + 1;
         var pOne = xArray[0];
 		var pTwo = xArray[1];
-		if (pOne == pTwo) {
+		if (pOne == pTwo) { 
 			pOne = 1;
 			pTwo = 2;
 		}
         txt1 = "Player 1 rolled ["+pOne+"]<br>";
         writeMsg(txt1);
         txt1 = txt1 + "Player 2 rolled ["+pTwo+"]<br><br>";
-    	setTimeout(function() {writeMsg(txt1);}, 1000); // time delay for dramatic affect
+    	setTimeout(function() {writeMsg(txt1);}, 1000); 
     }
-
+	
     if (pOne > pTwo) {
     	first = "Player 1";
         setTimeout(function(){ txt1 = txt1 + "Player 1 wins, please choose a square.";}, 2000);
@@ -46,13 +47,6 @@ function rollForTurn() {
 }
 
 
-
-
-
-
-
-
-
 function startGame() {
 	var xTurn = 0;
 	activePlayer = rollForTurn();
@@ -61,14 +55,13 @@ function startGame() {
     }
 	setTimeout(function() {hideGameMsg();}, 4000);
 	
-
+	
 	var btn = document.getElementById('btnStart');
 	btnDisabled(btn);  
 	var btn = document.getElementById('btnStop');
-  stopEnabled(btn);  
-  
+	stopEnabled(btn);  
 	
-	
+
 	var showPlayer = document.getElementById('showPlayer')
 	showPlayer.innerHTML = activePlayer;
 	showPlayer.style.color = "green";
@@ -100,16 +93,16 @@ function startEnabled(btn) {
 
 
 function stopGame() {
-	hideGameMsg(); 
+	hideGameMsg();
 	var btn = document.getElementById('btnStart');
 	startEnabled(btn); 
 	var btn = document.getElementById('btnStop');
-	btnDisabled(btn); 
+	btnDisabled(btn);
 	var showPlayer = document.getElementById('showPlayer')
 	showPlayer.innerHTML = "Game Stopped";
 	showPlayer.style.color='red';
 	
-	
+
 	var arrayO = document.getElementsByClassName("O");
 	var arrayX = document.getElementsByClassName("X");
 	for (var i=0; i<arrayO.length;i++) {
@@ -168,7 +161,7 @@ function getAvatars() {
 
 
 function determineAvatar() {
-
+	
 	var avatarArray = getAvatars(); 
 	var active = document.getElementById('showPlayer').innerHTML; 
 	p1Avatar = avatarArray[0];
@@ -179,12 +172,12 @@ function determineAvatar() {
 		var paintAvatar = p2Avatar;
 	}
 	return paintAvatar; 
+}
 
 
 function avatarPlaced() {
 	var parseText = document.getElementById('gameMsg').innerHTML;
-  var showPlayer = document.getElementById('showPlayer');
-  
+	var showPlayer = document.getElementById('showPlayer'); 
 	if (parseText == "That's three in a row, Player 1 wins!" || parseText == "That's three in a row, Player 2 wins!"){
 		showPlayer.innerHTML = "Game Stopped";
 		showPlayer.style.color='red';
@@ -211,12 +204,11 @@ function check(info,square) {
 
 function recordMoves(square) {
 	var proposedMove = square;
-	var boardState = document.getElementById('boardState').innerHTML;
+	var boardState = document.getElementById('boardState').innerHTML; 
 	var info = boardState.split(','); 
 	verdict = check(info,square); 
 	return verdict;
 }
-
 
 function recordMove(currentMove) {
 	var target = document.getElementById('boardState');
@@ -234,7 +226,7 @@ function checkForWinCon() {
     for (var i in info) {
     	squareArray.push(info[i].charAt(0)); 
     }
-  
+    
 	checkWinCon1(info,squareArray);
     checkWinCon2(info,squareArray);
     checkWinCon3(info,squareArray);
@@ -243,10 +235,9 @@ function checkForWinCon() {
     checkWinCon6(info,squareArray);
     checkWinCon7(info,squareArray);
     checkWinCon8(info,squareArray);
-
+	
 	check4Tie();
 }
-
 
 function check4Tie() {
 	var boardState = document.getElementById('boardState').innerHTML;
@@ -255,15 +246,11 @@ function check4Tie() {
 	var check = document.getElementById('gameMsg').innerHTML;
 	if(boardState.length >= 9 && check != "That's three in a row, Player 1 wins!" && check != "That's three in a row, Player 2 wins!") {
 		var txt1 = "Oh no! Nobody wins, it was a tie!";
-    tieSound();
-    
+		tieSound(); 
 		writeMsg(txt1);
 		setTimeout(function() {stopGame();}, 3000);
 	}
 }
-
-
-
 
 function winner(winDetected,winCon) {
 	if (winDetected == "win") {
@@ -276,7 +263,7 @@ function winner(winDetected,winCon) {
 		var btn = document.getElementById('btnStop');
 		btnDisabled(btn); 
 		document.getElementById('showPlayer').innerHTML = "Game Stopped";
-		glowBoard(winCon);
+		glowBoard(winCon); 
 	} 
 }
 
@@ -374,11 +361,6 @@ function blink() {
 
 
 
-
-
-
-
-
 function checkWinCon1(info,squareArray) {
 	var winDetected = "on";
 	var winCon1 = [0,1,2];
@@ -394,7 +376,7 @@ function checkWinCon1(info,squareArray) {
 			var match2Avatar = info[i].charAt(1);
 		}
 	}
-	
+
 	if (match0Avatar != undefined && match1Avatar != undefined && match2Avatar != undefined) {
 		if (match0Avatar == match1Avatar && match0Avatar == match2Avatar) {
 			winDetected = "win"; 
@@ -503,6 +485,7 @@ function checkWinCon6(info,squareArray) {
 	var winDetected = "on";
 	for (var i in info) {
 		if (info[i].charAt(0) == "2") {
+			var match2Avatar = info[i].charAt(1); 
 		}
 		if (info[i].charAt(0) == "5") {
 			var match5Avatar = info[i].charAt(1);
@@ -566,23 +549,19 @@ function checkWinCon8(info,squareArray) {
 }
 
 
-
-
-
 function square1Animate() {
 	var activePlayer = document.getElementById('showPlayer').innerHTML;
 	if (activePlayer != "Game Stopped") { 
-		var square = "0"; 
 		var verdict = recordMoves(square);
-		if (verdict == undefined) { 
-			var paintAvatar = determineAvatar(); 
-			var selected = document.getElementsByClassName(paintAvatar)[0]; 
-			if (paintAvatar == "O") { 
-				animateO(selected); 
+		if (verdict == undefined) {
+			var paintAvatar = determineAvatar();
+			var selected = document.getElementsByClassName(paintAvatar)[0];
+			if (paintAvatar == "O") {
+				animateO(selected);
 			} else if (paintAvatar == "X") {
 				animateX(selected); 
 			}
-		
+	
 			var currentMove = ","+square+paintAvatar;
 			recordMove(currentMove);
 			checkForWinCon(); 
@@ -595,6 +574,7 @@ function square2Animate() {
 	var activePlayer = document.getElementById('showPlayer').innerHTML;
 	if (activePlayer != "Game Stopped") { 
 		var square = "1"; 
+	
 		var verdict = recordMoves(square);
 		if (verdict == undefined) { 
 			var paintAvatar = determineAvatar(); 
@@ -604,7 +584,7 @@ function square2Animate() {
 			} else if (paintAvatar == "X") {
 				animateX(selected); 
 			}
-		
+			
 			var currentMove = ","+square+paintAvatar;
 			recordMove(currentMove);
 			checkForWinCon(); 
@@ -617,6 +597,7 @@ function square3Animate() {
 	var activePlayer = document.getElementById('showPlayer').innerHTML;
 	if (activePlayer != "Game Stopped") { 
 		var square = "2"; 
+	
 		var verdict = recordMoves(square);
 		if (verdict == undefined) { 
 			var paintAvatar = determineAvatar(); 
@@ -629,7 +610,7 @@ function square3Animate() {
 			
 			var currentMove = ","+square+paintAvatar;
 			recordMove(currentMove);
-			checkForWinCon();
+			checkForWinCon(); 
 			avatarPlaced(square,paintAvatar); 
 			squareSound(); 
 		}
@@ -639,11 +620,12 @@ function square4Animate() {
 	var activePlayer = document.getElementById('showPlayer').innerHTML;
 	if (activePlayer != "Game Stopped") { 
 		var square = "3"; 
+		
 		var verdict = recordMoves(square);
 		if (verdict == undefined) { 
 			var paintAvatar = determineAvatar(); 
 			var selected = document.getElementsByClassName(paintAvatar)[3]; 
-			if (paintAvatar == "O") { 
+			if (paintAvatar == "O") {
 				animateO(selected); 
 			} else if (paintAvatar == "X") {
 				animateX(selected); 
@@ -660,7 +642,8 @@ function square4Animate() {
 function square5Animate() {
 	var activePlayer = document.getElementById('showPlayer').innerHTML;
 	if (activePlayer != "Game Stopped") { 
-		var square = "4";
+		var square = "4"; 
+		
 		var verdict = recordMoves(square);
 		if (verdict == undefined) { 
 			var paintAvatar = determineAvatar(); 
@@ -683,13 +666,13 @@ function square6Animate() {
 	var activePlayer = document.getElementById('showPlayer').innerHTML;
 	if (activePlayer != "Game Stopped") { 
 		var square = "5"; 
-	
+		
 		var verdict = recordMoves(square);
-		if (verdict == undefined) { 
+		if (verdict == undefined) {
 			var paintAvatar = determineAvatar(); 
 			var selected = document.getElementsByClassName(paintAvatar)[5]; 
 			if (paintAvatar == "O") { 
-				animateO(selected);
+				animateO(selected); 
 			} else if (paintAvatar == "X") {
 				animateX(selected); 
 			}
@@ -697,15 +680,16 @@ function square6Animate() {
 			var currentMove = ","+square+paintAvatar;
 			recordMove(currentMove);
 			checkForWinCon(); 
-			avatarPlaced(square,paintAvatar);
+			avatarPlaced(square,paintAvatar); 
 			squareSound(); 
+		}
 	}
 }
 function square7Animate() {
 	var activePlayer = document.getElementById('showPlayer').innerHTML;
 	if (activePlayer != "Game Stopped") { 
 		var square = "6"; 
-	
+		
 		var verdict = recordMoves(square);
 		if (verdict == undefined) { 
 			var paintAvatar = determineAvatar(); 
@@ -715,18 +699,20 @@ function square7Animate() {
 			} else if (paintAvatar == "X") {
 				animateX(selected); 
 			}
-		
+			
 			var currentMove = ","+square+paintAvatar;
 			recordMove(currentMove);
 			checkForWinCon(); 
 			avatarPlaced(square,paintAvatar); 
 			squareSound(); 
+		}
 	}
 }
 function square8Animate() {
 	var activePlayer = document.getElementById('showPlayer').innerHTML;
 	if (activePlayer != "Game Stopped") { 
 		var square = "7"; 
+		
 		var verdict = recordMoves(square);
 		if (verdict == undefined) { 
 			var paintAvatar = determineAvatar(); 
@@ -736,12 +722,12 @@ function square8Animate() {
 			} else if (paintAvatar == "X") {
 				animateX(selected); 
 			}
-		
+			
 			var currentMove = ","+square+paintAvatar;
 			recordMove(currentMove);
 			checkForWinCon(); 
 			avatarPlaced(square,paintAvatar); 
-			squareSound();
+			squareSound(); 
 		}
 	}
 }
@@ -749,6 +735,7 @@ function square9Animate() {
 	var activePlayer = document.getElementById('showPlayer').innerHTML;
 	if (activePlayer != "Game Stopped") { 
 		var square = "8"; 
+		
 		var verdict = recordMoves(square);
 		if (verdict == undefined) { 
 			var paintAvatar = determineAvatar(); 
@@ -758,7 +745,7 @@ function square9Animate() {
 			} else if (paintAvatar == "X") {
 				animateX(selected); 
 			}
-		
+			
 			var currentMove = ","+square+paintAvatar;
 			recordMove(currentMove);
 			checkForWinCon(); 

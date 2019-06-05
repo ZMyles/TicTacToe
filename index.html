@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="css/style.css">
   <title>Tic Tac Toe</title>
+  
 </head>
 <body>
 
@@ -25,17 +26,22 @@
   </audio>
 
 
-
+<!--  -->
 
   <div id="shell">
 			<div id="gameMsgBox" onclick="hideGameMsg()"><p id="gameMsg"></p></div>
 			
 			<div class="console_Left">
 				<div class="displayBox boxLeft">
-					<Strong>Current Config:</strong><br><br>
+          <Strong>Current Config:</strong>
+            
+            <br><br>
 					<label>Player 1: &nbsp&nbsp<span id="p1Display">O</span></label><br>
 					<label>Player 2: &nbsp&nbsp<span id="p2Display">X</span></label>
-				</div>
+        </div>
+				
+				<!-- =======================START BUTTON ==================================-->
+
 				<div class=""><button id="btnStart" onclick="startGame()">Start Game</button></div>
 				<div id="boardState"></div>
 				<div id="controls">
@@ -45,6 +51,8 @@
 					</div>
 				</div>
 			</div>
+
+			<!--===========================  BOARD ========================================-->
 			
 			<table>
 				<tr>
@@ -141,19 +149,20 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- X & O's-->
 		<script>
 			var arrayO = document.getElementsByClassName("O");
 			var arrayX = document.getElementsByClassName("X");
 			for (var i=0; i<arrayO.length;i++) {
-				arrayO[i].style.transform = "translateY(-100%)"; // this initializes all avatar graphics to not be visible as translateY(0%) would make them appear
+        arrayO[i].style.transform = "translateY(-100%)"; 
+        
 			}
 			for (var i=0; i<arrayX.length;i++) {
 				arrayX[i].style.transform = "translateY(100%)";
 			}
 		</script>
 
-
-  <!-- =========================BoardState========================-->
 
   
   <script src="script/script.js"></script>
